@@ -1,37 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-        <meta default-charset="utf-8">
-        <title>UWC V</title>
-        {% if config.env == "production"%}
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta default-charset="utf-8">
+  <title>UWC V</title>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.11&libraries=geometry,places&sensor=true&language=en"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  {% if config.env == "production"%}
+  <!-- STYLES -->
+  <link rel="stylesheet" type="text/css" href="/css/app.min.css">
+  <script data-main="js/main-built.js" src="/js/require.js"></script>
+  <!-- SCRIPTS -->
+  {%else%}
+  <!-- STYLES -->
+  <link rel="stylesheet" type="text/css" href="/js/components/bootstrap.css/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- SCRIPTS -->
+  <script data-main="js/main" src="/js/require.js"></script>
+  {%endif%}
+</head>
+<body style="display: none">
+<header id="nav"></header>
 
-        <!-- STYLES -->
-            <link rel="stylesheet" type="text/css" href="/css/app.min.css">
-        <!-- SCRIPTS -->
+<div class="container">
+  {%block body%}{%endblock%}
 
-        {%else%}
+  <div id="content"></div>
+</div>
 
-        <!-- STYLES -->
-            <link rel="stylesheet" type="text/css" href="/js/components/bootstrap.css/css/bootstrap.css">
-            <link rel="stylesheet" type="text/css" href="css/main.css">
+<footer>
+    <ul class="social-nav">
+        <li class="social-link"><a href="http://facebook.com"><img src="i/fb.png"></a></li>
+        <li class="social-link"><a href="http://linkedin.com"><img src="i/li.png"></a></li>
+        <li class="social-link"><a href="http://twitter.com"><img src="i/twi.png"></a></li>
+    </ul>
+</footer>
 
-        <!-- SCRIPTS -->
-        <script data-main="js/main" src="/js/require.js"></script>
+<script type="text/template" id="nav-template">
+  <div class="navbar" id="navbar">{%block navbar%}{%endblock%}</div>
 
-        {%endif%}
-
-
-    </head>
-    <body>
-        <header>
-        </header>
-
-        <div class="content">
-            {%block body%}{%endblock%}
+  <div class="modal hide" id="myModal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">x</button>
+      <h3>Регистрация</h3>
+    </div>
+    <div class="modal-body well">
+      <div class="alert alert-error hidden">
+        Что-то не так. Попробуйте еще раз!
+      </div>
+      <form method="post" action='' name="login_form" id="register">
+        <p><input type="text" class="span3" name="username" placeholder="Логин"></p>
+        <p><input type="text" class="span3" name="email" placeholder="Email"></p>
+        <p><input type="password" class="span3 password-field" name="password" placeholder="Пароль"></p>
+        <p><input type="password" class="span3" name="confirm-password" placeholder="Повторите пароль"></p>
+        <p>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="isAdmin"> Админ?
+          </label>
         </div>
+        </p>
+        <p>
+          <button type="submit" class="btn btn-primary btn-info">Зарегистрироваться</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</script>
 
-        <footer>
-        </footer>
-    </body>
+</body>
 </html>
+

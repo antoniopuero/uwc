@@ -1,18 +1,37 @@
+express = require 'express'
+app = module.exports = express()
+
+server = require('http').createServer(app)
+
+io = require('socket.io').listen(server);
+io.set 'log level', 1
+
+fs = require 'fs'
+cons = require 'consolidate'
 mongoose = require 'mongoose'
 
+global.io = io
+
+# setInterval ->
+# global.io.sockets.emit 'order-create', {order: 'orderCreate'}
+# global.io.sockets.emit 'order-delete', {order: 'orderDelete'}
+# global.io.sockets.emit 'order-update', {order: 'orderUpdate'}
+# global.io.sockets.emit 'car-create', {order: 'carCreate'}
+# global.io.sockets.emit 'car-delete', {order: 'carDelete'}
+# global.io.sockets.emit 'car-update', {order: 'carUpdate'}
+# , 1000
+
 global.path =
-    root: require('path').normalize("#{__dirname}")
+  root: require('path').normalize("#{__dirname}")
 
 global.config = (require "#{global.path.root}/config")
 
+global.apiUrl = global.config.apiUrl
+
 global.connections = {
-    common: mongoose.createConnection(config.dbUri)
+  common: mongoose.createConnection(config.dbUri)
 }
 
-express = require 'express'
-app = module.exports = express()
-fs = require 'fs'
-cons = require 'consolidate'
 
 #VIEWS ENGINE
 app.engine 'html', cons.swig
@@ -24,8 +43,8 @@ app.set('port', process.env.PORT || 3000);
 app.use express.bodyParser()
 
 if config.env is 'production'
-     # gzip
-    app.use express.compress()
+  # gzip
+  app.use express.compress()
 
 app.use express.static("#{global.path.root}/public")
 
@@ -34,97 +53,104 @@ app.use express.cookieParser('my secret')
 app.locals.config = config
 
 app.use express.cookieSession({
-    key: 'sid'
-    cookie:
-        maxAge: 1000 * 86400 * 365 * 5 # 5 years
+  key: 'sid'
+  cookie:
+    maxAge: 1000 * 86400 * 365 * 5 # 5 years
 })
 
 class NotFound extends Error
-    constructor: (path) ->
-        @.name = 'Not Found'
-        @.code = 404
-        @.path = path
-        Error.call @, path
-        Error.captureStackTrace @, arguments.callee
+  constructor: (path) ->
+    @.name = 'Not Found'
+    @.code = 404
+    @.path = path
+    Error.call @, path
+    Error.captureStackTrace @, arguments.callee
 
 class Forbidden extends Error
-    constructor: (path) ->
-        @.name = 'Forbidden'
-        @.code = 403
-        Error.call @, 'Forbidden'
-        Error.captureStackTrace @, arguments.callee
+  constructor: (path) ->
+    @.name = 'Forbidden'
+    @.code = 403
+    Error.call @, 'Forbidden'
+    Error.captureStackTrace @, arguments.callee
 
 class Unauthorized extends Error
-    constructor: (path) ->
-        @.name = 'Unauthorized'
-        @.code = 401
-        Error.call @, 'Unauthorized'
-        Error.captureStackTrace @, arguments.callee
+  constructor: (path) ->
+    @.name = 'Unauthorized'
+    @.code = 401
+    Error.call @, 'Unauthorized'
+    Error.captureStackTrace @, arguments.callee
 
 class BadRequest extends Error
-    constructor: (msg) ->
-        @.name = msg || 'Bad request'
-        @.code = 400
-        Error.call @
-        Error.captureStackTrace @, arguments.callee
+  constructor: (msg) ->
+    @.name = msg || 'Bad request'
+    @.code = 400
+    Error.call @
+    Error.captureStackTrace @, arguments.callee
 
 app.Errors = {
-    NotFound: NotFound
-    Forbidden: Forbidden
-    Unauthorized: Unauthorized
-    BadRequest: BadRequest
+  NotFound: NotFound
+  Forbidden: Forbidden
+  Unauthorized: Unauthorized
+  BadRequest: BadRequest
 }
 
 initRoutes = (path)->
-    files = fs.readdirSync path
-    for file in files
-        curPath = "#{path}/#{file}"
-        if fs.statSync(curPath).isDirectory()
-            initRoutes curPath
-        else
-            (require curPath)(app)
+  files = fs.readdirSync path
+  for file in files
+    curPath = "#{path}/#{file}"
+    if fs.statSync(curPath).isDirectory()
+      initRoutes curPath
+    else
+      (require curPath)(app)
 
 app.use addUserToLocals = (req, res, next) ->
-    if req.session.userId
-        userService = (require "#{global.path.root}/services/userService")
-        userService.getUser req.session.userId, (err, user)->
-            if err then return next(err)
-            if user
-                req.user = user
-                res.locals.user = user
-                return next()
-            else
-                return next()
-    else
-        res.locals.user = null
-        next()
+  if req.session.userId
+    userService = (require "#{global.path.root}/services/userService")
+    userService.getUser req.session.userId, (err, user)->
+      if err then return next(err)
+      if user
+        req.user = user
+        res.locals.user = user
+        return next()
+      else
+        return next()
+  else
+    res.locals.user = null
+    next()
 
 
 app.use (req, res, next)->
-    res.apiResponse = (result, code=200, error=null)->
-        res.json(
-            code: code
-            result: result
-            error: error
-        )
-    next()
+  res.apiResponse = (result, code=200, error=null, params)->
+    if params?.io
+      global.io.sockets.emit params.io, result
+
+    res.status code
+    res.json(
+      code: code
+      result: result
+      error: error
+    )
+  next()
 
 initRoutes "#{global.path.root}/routes"
 
 app.use (err, req, res, next) ->
-    if req.xhr
-        res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
+  if req.xhr
+    res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
+  else
+    if err instanceof NotFound
+      res.status(404)
+      res.render 'errors/404.html'
+    else if err instanceof Unauthorized or err instanceof Forbidden
+      res.status(403)
+      res.render 'errors/403.html'
     else
-        if err instanceof NotFound
-            res.status(404)
-            res.render 'errors/404.html'
-        else if err instanceof Unauthorized or err instanceof Forbidden
-            res.status(403)
-            res.render 'errors/403.html'
-        else
-            console.log(err.stack || err)
-            res.status(500)
-            res.render 'errors/500.html'
+      console.log(err.stack || err)
+      res.status(500)
+      res.render 'errors/500.html'
 
-app.listen(app.get('port'))
+app.get '*', (req, res, next) ->
+  next new app.Errors.NotFound
+
+server.listen(app.get('port'))
 console.log 'Listening on port ' + app.get 'port'

@@ -1,0 +1,174 @@
+{% extends 'layout.html' %}
+
+{% block navbar %}
+<div class="navbar-inner">
+  <a class="brand" href="/#">TaxiSky</a>
+  <ul class="nav pull-right" id="auth">
+    <!-- AUTH FORM -->
+    {% if user %}
+    <li>
+      <a href="/#">{{ user.username }}</a>
+    </li>
+
+    <li>
+      <a class="logout" href="#logout">Выйти</a>
+    </li>
+    {% else %}
+    <li>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Войти
+        <b class="caret"></b>
+      </a>
+
+      <div class="span4 well dropdown-menu">
+        <form class="text-center" method="POST" action="" accept-charset="UTF-8" id="login">
+          <div class="alert alert-error hidden">
+            Неправильный логин или пароль!
+          </div>
+          <input type="text" class="span4" name="username" placeholder="Логин">
+          <input type="password" class="span4" name="password" placeholder="Пароль">
+          <button type="submit" class="btn btn-info btn-block btn-login">Войти</button>
+          <div class="text-center">или</div>
+          <button class="btn btn-info btn-primary btn-block" data-toggle="modal" href="#myModal">Зарегистрироваться
+          </button>
+        </form>
+      </div>
+    </li>
+    {% endif %}
+    <!-- END AUTH FORM -->
+  </ul>
+</div>
+{% endblock %}
+
+{% block body %}
+<div id="admin"></div>
+
+<script type="text/template" id="admin-template">
+  <div class="" id="map"></div>
+  <div class="" id="create-order"></div>
+
+  <div class="black-text">
+    <div id="orders"></div>
+    <div id="cars"></div>
+    <div class="admin-tools">
+      <button class="btn btn-inverse">
+        <i class="icon-wrench icon-white js-edit-order-path"></i>
+      </button>
+      <button class="btn btn-inverse">
+        <i class="icon-resize-horizontal icon-white js-apply-order"></i>
+      </button>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="create-order-template">
+
+  <div class="well well-small text-center create-order js-create-order js-show-form">
+    <strong class="text-info">Создать заказ</strong>
+  </div>
+
+  <div class="alert alert-error js-error-provider hide">
+    <a class="close js-hide-error" data-dismiss="">×</a>
+    <strong>Error ! </strong><span class="js-error-text"> This is a fatal error.</span>
+  </div>
+
+  <form id="admin-form" class="form-horizontal admin-form hide">
+    <div class="control-group">
+      <label class="control-label" for="input-start">Откуда</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge typeahead" id="input-start" name="startPlace"
+               placeholder="Откуда ехать">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="input-end">Куда</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge typeahead" id="input-end" name="endPlace" placeholder="Куда ехать">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="input-phone">Телефон</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge" id="input-phone" name="phone" placeholder="Телефон клиента">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="input-date">Когда</label>
+
+      <div class="controls bootstrap-timepicker">
+        <input type="text" class="input-xxlarge" id="input-date" name="date" placeholder="Дата поездки">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="input-price">Цена</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge" id="input-price" name="price" placeholder="Цена поездки">
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <div class="controls">
+        <input type="button" class="js-calculate-order btn btn-info" value="Рассчитать">
+
+        <div class="admin__buttons-submit">
+          <input type="button" class="js-save-order btn btn-success" value="Поехали">
+          <input type="button" class="js-cancel-order btn btn-danger" value="Охрана, отменa">
+        </div>
+      </div>
+    </div>
+
+  </form>
+</script>
+
+<script type="text/template" id="side-logger">
+  <div class="logger">
+    <div class="triangle-button"></div>
+    <div class="log-text"></div>
+  </div>
+</script>
+
+<script type="text/template" id="order-list">
+  <h3 class="color-white">
+    Заказы
+  </h3>
+ <table id="order-list" class="table table-condensed table-bordered table-hover order-table">
+    <thead>
+      <tr>
+        <th>Откуд ехать</th>
+        <th>Куда ехать</th>
+        <th>Время</th>
+        <th>Цена</th>
+        <th>Телефон</th>
+        <th>Статус</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id=""></tbody>
+  </table>
+</script>
+
+<script type="text/template" id="car-liste">
+  <h3 class="color-white">
+    Таксисты
+  </h3>
+ <table id="car-list" class="table table-condensed table-bordered table-hover order-table">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Cтатус</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</script>
+{% endblock %}
