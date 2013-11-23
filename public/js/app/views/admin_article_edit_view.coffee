@@ -1,36 +1,36 @@
 define ['marionette', 'ckeditorAdapter'], (Marionette) ->
   class AdminArticleEditView extends Marionette.ItemView
     template: '#admin-article-edit-template'
+    id: 'edit-article'
 
     events:
-      'click .show-form': 'add'
       'click .submit .btn-success': 'save'
       'click .submit .btn-danger': 'cancel'
 
-    ui:
-      form: '.add-form'
-      inputName: '.add-form .name'
-
     prepareModelData: ->
-      {}
+      data = {}
+      _.each CKEDITOR.instances, (inst) ->
+        data[$(inst.element.$).data('name')] = inst.getData()
 
-    resetForm: ->
+      data
 
-    onRender: ->
+    cancel: (e) ->
+      e.preventDefault()
+      window.location.hash = '/articles'
 
+    onShow: ->
       @$('.editable').attr({
-           contenteditable: true,
-           spellcheck: false
+         contenteditable: true,
+         spellcheck: false
       }).ckeditor({
-           filebrowserImageUploadUrl: '/upload'
-      })
+        filebrowserImageUploadUrl: '/upload'
+      });
 
     save: (e) ->
       @model.set @prepareModelData()
       @model.save @model.toJSON(),
         success: =>
-          @collection.push @model
-          @resetForm()
+          window.location.hash = '/articles'
 
       e.preventDefault()
 

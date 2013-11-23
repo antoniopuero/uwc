@@ -12,3 +12,5 @@ label.error{color:#c7254e;background:#f9f2f4}
 .article-prologue{padding:2%}
 .article-author{text-align:center;color:#474747}
 table .delete{cursor:pointer}
+#edit-article .submit{margin:22px auto}
+#edit-article .editable{margin:40px auto}
