@@ -9,7 +9,6 @@
     "bootstrap-stylus": "~3.0.0",
     "backbone.marionette": "~1.1.0",
     "isotope": "~1.5.25",
-    "ckeditor": "*",
-    "imagesloaded": "~3.0.4"
+    "ckeditor": "*"
   }
 }
