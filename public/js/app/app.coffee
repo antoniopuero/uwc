@@ -20,6 +20,11 @@ define [
 
   App.addInitializer ->
     $('body').show()
+    $('#container').isotope({
+      itemSelector : '.article',
+      layoutMode : 'fitRows'
+    }
+    )
     Backbone.history.start()
 
   window.App = App
