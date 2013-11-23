@@ -41,4 +41,4 @@ UWC V (SkyNews)
 
 HEROKU
 ------
-http://taxi-sky.herokuapp.com
+http://uwc5final.herokuapp.com
