@@ -1,8 +1,7 @@
 define [
   'marionette',
   'isotope',
-  'ckeditorAdapter',
-  'imagesLoaded'
+  'ckeditorAdapter'
 ], (Marionette) ->
   class UserLayout extends Marionette.Layout
     template: '#user-template'
