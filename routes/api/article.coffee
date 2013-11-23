@@ -2,12 +2,17 @@ articleService = require "#{global.path.root}/services/articleService"
 
 module.exports = (app) ->
 
-    app.get '/api/articles', (req, res, next) ->
+    app.get '/api/articles/?:id', (req, res, next) ->
         categoryId = req.query.categoryId
 
-        articleService.findAll categoryId, (err, articles) ->
-            if err then return next err
-            res.json articles
+        if req.params.id?
+            articleService.findById req.params.id, (err, article) ->
+                if err then return next err
+                res.json article
+        else
+            articleService.findAll categoryId, (err, articles) ->
+                if err then return next err
+                res.json articles
 
     app.post '/api/articles', (req, res, next) ->
         articleService.create req.body, (err, article) ->

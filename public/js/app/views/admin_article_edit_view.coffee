@@ -1,4 +1,4 @@
-define ['marionette'], (Marionette) ->
+define ['marionette', 'ckeditorAdapter'], (Marionette) ->
   class AdminArticleEditView extends Marionette.ItemView
     template: '#admin-article-edit-template'
 
@@ -11,14 +11,19 @@ define ['marionette'], (Marionette) ->
       form: '.add-form'
       inputName: '.add-form .name'
 
-    onRender: ->
-      @$('.show-form').hide() unless @categoryId?
-
     prepareModelData: ->
       {}
 
     resetForm: ->
 
+    onRender: ->
+
+      @$('.editable').attr({
+           contenteditable: true,
+           spellcheck: false
+      }).ckeditor({
+           filebrowserImageUploadUrl: '/upload'
+      })
 
     save: (e) ->
       @model.set @prepareModelData()
