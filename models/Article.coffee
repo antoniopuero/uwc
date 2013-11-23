@@ -8,7 +8,6 @@ ArticleSchema = new Schema
         required: true
     body:
         type: String
-        required: true
 
     categoryId: ObjectId
 
@@ -19,6 +18,8 @@ ArticleSchema = new Schema
     orderNumber: Number
 
     rating: Number
+
+    isPublished: Boolean
 
 
 

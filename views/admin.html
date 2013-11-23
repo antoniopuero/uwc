@@ -56,6 +56,24 @@
 
 <script type="text/template" id="admin-categories-template">
   <h3>Категории</h3>
+  <a href="#" class="show-form">добавить</a>
+  <form class="form-horizontal add-form hide">
+    <div class="control-group">
+      <label class="control-label" for="input-start">Название</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge typeahead name" placeholder="Название">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls submit">
+        <input type="button" class="btn btn-success" value="Сохранить">
+        <input type="button" class="btn btn-danger" value="Отмена">
+      </div>
+    </div>
+  </form>
+  
   <table id="categories-list" class="table table-condensed table-bordered table-hover order-table">
     <thead>
       <tr>
@@ -69,12 +87,29 @@
 </script>
 
 <script type="text/template" id="admin-category-template">
-  <td><%= name %></td>
-  <td><%= order %></td>
+  <td><a href="#/category/<%= _id %>"><%= title %></a></td>
+  <td><%= orderNumber %></td>
 </script>
 
 <script type="text/template" id="admin-articles-template">
-  <h3>Категории</h3>
+  <h3>Статьи</h3>
+  <a href="#" class="show-form">добавить</a>
+  <form class="form-horizontal add-form hide">
+    <div class="control-group">
+      <label class="control-label" for="input-start">Название</label>
+
+      <div class="controls">
+        <input type="text" class="input-xxlarge typeahead name" placeholder="Название">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls submit">
+        <input type="button" class="btn btn-success" value="Сохранить">
+        <input type="button" class="btn btn-danger" value="Отмена">
+      </div>
+    </div>
+  </form>
   <table id="categories-list" class="table table-condensed table-bordered table-hover order-table">
     <thead>
     <tr>
@@ -88,7 +123,7 @@
 </script>
 
 <script type="text/template" id="admin-article-template">
-  <td><%= name %></td>
-  <td><%= order %></td>
+  <td><%= title %></td>
+  <td><%= categoryId %></td>
 </script>
 {% endblock %}

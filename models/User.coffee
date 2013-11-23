@@ -15,6 +15,8 @@ UserSchema = new Schema
     isAdmin:
         type: Boolean
 
+    isEditor: Boolean
+
 UserSchema.pre 'save', (next) ->
     if !@isModified('password') then return next()
 
