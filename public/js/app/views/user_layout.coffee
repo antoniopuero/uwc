@@ -23,7 +23,7 @@ define [
       @articles.fetch()
 
     showArticle: (id) ->
-      model = new Article
+      model = new Article (_id:id)
       @articles.add model
       model.id = id
       model.fetch success: =>
