@@ -1,4 +1,4 @@
-Category = require "#{global.path.root}/models/category"
+Category = require "#{global.path.root}/models/Category"
 
 class categoryService
 
