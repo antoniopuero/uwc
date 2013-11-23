@@ -11,6 +11,7 @@ define [
     initialize: (options) ->
 
     onCompositeCollectionRendered: ->
+      console.log @el
         @$('#content').isotope {
           itemSelector : '.article',
           layoutMode : 'fitRows',
