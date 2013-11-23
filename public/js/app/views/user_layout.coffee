@@ -3,6 +3,8 @@ define [
   'cs!articles'
   'cs!categories'
   'cs!userArticlesView'
+  'isotope',
+  'ckeditorAdapter'
 ], (Marionette, Articles, Categories, UserArticlesView) ->
   class UserLayout extends Marionette.Layout
     template: '#user-template'
@@ -15,6 +17,9 @@ define [
       content: '#user-content'
 
     onShow: ->
+      # $('#content').imagesLoaded (instance)->
+      #   console.log instance
+
       # $('#content').isotope {
       #     itemSelector : '.article',
       #     layoutMode : 'fitRows',
@@ -24,7 +29,14 @@ define [
       #     },
       #     sortBy: 'priority'
       #   }, () ->
-      #     console.log 'fsafads'
+      #     console.log 'it works'
+      #   $('.article .article-prologue').attr({
+      #     contenteditable: true,
+      #     spellcheck: false
+      #   }).ckeditor({
+      #     filebrowserImageUploadUrl: '/upload'
+      #   })
+
 
     showArticles: ->
       @content.show new UserArticlesView collection: @articles

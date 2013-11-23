@@ -10,6 +10,9 @@ requirejs.config({
       backbone: "components/backbone/backbone",
       marionette: "components/backbone.marionette/lib/backbone.marionette",
       isotope: "components/isotope/jquery.isotope",
+      imagesLoaded: "components/imagesloaded/imagesloaded",
+      ckeditor: "components/ckeditor/ckeditor",
+      ckeditorAdapter: "components/ckeditor/adapters/jquery",
 
       // MODELS
       user: 'app/models/users',
@@ -32,7 +35,8 @@ requirejs.config({
       adminArticleView: 'app/views/admin_article_view',
       userArticleView: 'app/views/user_article_view',
       adminCategoriesView: 'app/views/admin_categories_view',
-      adminCategoryView: 'app/views/admin_category_view'
+      adminCategoryView: 'app/views/admin_category_view',
+      adminArticleEditView: 'app/views/admin_article_edit_view'
 	},
 	shim: {
         bootstrap: {
@@ -41,8 +45,17 @@ requirejs.config({
         isotope: {
             deps: ['jquery']
         },
+        imagesLoaded: {
+            deps: ['jquery']
+        },
+        ckeditor: {
+            deps: ['jquery']
+        },
+        ckeditorAdapter: {
+            deps: ['ckeditor']
+        },
         validator: {
-          deps: ['jquery']
+            deps: ['jquery']
         },
         backbone: {
             deps: ["underscore", "jquery"],
@@ -59,7 +72,7 @@ requirejs.config({
 	urlArgs: "bust=" + (new Date()).getTime()
 });
 
-requirejs(['cs!app/app', 'isotope'], function (App) {
+requirejs(['cs!app/app'], function (App) {
     return $(function(){
         App.start();
     });
