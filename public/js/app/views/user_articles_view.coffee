@@ -10,7 +10,4 @@ define [
 
     initialize: (options) ->
 
-    onRender: ->
-      console.log @$el.html()
-
   UserArticlesView
