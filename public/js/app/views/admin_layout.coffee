@@ -1,11 +1,12 @@
 define [
   'marionette'
+  'cs!article'
   'cs!articles'
   'cs!categories'
   'cs!adminArticlesView'
   'cs!adminCategoriesView'
   'cs!adminArticleEditView'
-], (Marionette, Articles, Categories, AdminArticlesView, AdminCategoriesView, AdminArticleEditView) ->
+], (Marionette, Article, Articles, Categories, AdminArticlesView, AdminCategoriesView, AdminArticleEditView) ->
   class AdminLayout extends Marionette.Layout
     template: '#admin-template'
 
@@ -17,7 +18,11 @@ define [
       @categories = new Categories
 
     showArticle: (id) ->
-      @content.show new AdminArticleEditView model: @articles.get(id)
+      model = new Article
+      @articles.add model
+      model.id = id
+      model.fetch success: =>
+        @content.show new AdminArticleEditView model: model
 
     showArticles: ->
       @content.show new AdminArticlesView collection: @articles
