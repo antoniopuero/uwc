@@ -16,18 +16,8 @@ define [
       modal: "#modal"
       content: '#user-content'
 
-    onShow: ->
-
-#         $('.article .article-prologue').attr({
-#           contenteditable: true,
-#           spellcheck: false
-#         }).ckeditor({
-#           filebrowserImageUploadUrl: '/upload'
-#         })
-
     showArticles: ->
       @content.show new UserArticlesView collection: @articles
       @articles.fetch()
-      window.a = @articles
 
   UserLayout

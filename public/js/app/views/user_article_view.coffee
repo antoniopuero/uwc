@@ -3,7 +3,4 @@ define ['marionette'], (Marionette) ->
     tagName: 'div'
     template: '#user-article-template'
 
-    onRender: ->
-        console.log @$el.html()
-
   UserArticleView
