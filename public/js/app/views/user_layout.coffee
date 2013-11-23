@@ -5,6 +5,8 @@ define [
     template: '#user-template'
 
     initialize: ->
+      @articles = new Articles
+      @categories = new Categories
 
     regions:
       modal: "#modal"
@@ -20,5 +22,10 @@ define [
           sortBy: 'priority'
         }, () ->
           console.log 'fsafads'
+
+
+    showArticles: ->
+      @content.show new AdminArticlesView collection: @articles
+      @articles.fetch()
 
   UserLayout
