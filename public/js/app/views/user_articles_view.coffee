@@ -20,6 +20,5 @@ define [
           },
           sortBy: 'priority'
         }
-        , 1000
 
   UserArticlesView
