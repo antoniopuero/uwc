@@ -1,4 +1,4 @@
-article = require "#{global.path.root}/models/article"
+Article = require "#{global.path.root}/models/article"
 
 class categoryService
 
@@ -14,11 +14,17 @@ class categoryService
     findByTagName: (tagsArray, callback) ->
 
     update: (id, data, callback) ->
-        @findById id (err, article) ->
+        @findById id, (err, article) ->
             if err then return callback err
             article.set(data)
             article.save (err, data) ->
                 if err then return callback err
-                return article
+                return callback null, article
+
+    create: (data, callback) ->
+        article = new Article(data)
+        article.save (err, data) ->
+            if err then return callback err
+            return callback null, article
 
 module.exports = new categoryService
