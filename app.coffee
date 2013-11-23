@@ -3,23 +3,9 @@ app = module.exports = express()
 
 server = require('http').createServer(app)
 
-io = require('socket.io').listen(server);
-io.set 'log level', 1
-
 fs = require 'fs'
 cons = require 'consolidate'
 mongoose = require 'mongoose'
-
-global.io = io
-
-# setInterval ->
-# global.io.sockets.emit 'order-create', {order: 'orderCreate'}
-# global.io.sockets.emit 'order-delete', {order: 'orderDelete'}
-# global.io.sockets.emit 'order-update', {order: 'orderUpdate'}
-# global.io.sockets.emit 'car-create', {order: 'carCreate'}
-# global.io.sockets.emit 'car-delete', {order: 'carDelete'}
-# global.io.sockets.emit 'car-update', {order: 'carUpdate'}
-# , 1000
 
 global.path =
   root: require('path').normalize("#{__dirname}")
@@ -134,20 +120,20 @@ app.use (req, res, next)->
 
 initRoutes "#{global.path.root}/routes"
 
-app.use (err, req, res, next) ->
-  if req.xhr
-    res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
-  else
-    if err instanceof NotFound
-      res.status(404)
-      res.render 'errors/404.html'
-    else if err instanceof Unauthorized or err instanceof Forbidden
-      res.status(403)
-      res.render 'errors/403.html'
-    else
-      console.log(err.stack || err)
-      res.status(500)
-      res.render 'errors/500.html'
+# app.use (err, req, res, next) ->
+#   if req.xhr
+#     res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
+#   else
+#     if err instanceof NotFound
+#       res.status(404)
+#       res.render 'errors/404.html'
+#     else if err instanceof Unauthorized or err instanceof Forbidden
+#       res.status(403)
+#       res.render 'errors/403.html'
+#     else
+#       console.log(err.stack || err)
+#       res.status(500)
+#       res.render 'errors/500.html'
 
 app.get '*', (req, res, next) ->
   next new app.Errors.NotFound

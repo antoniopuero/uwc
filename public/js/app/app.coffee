@@ -22,7 +22,6 @@ define [
     $('body').show()
     Backbone.history.start()
 
-  App.socket = io.connect('http://localhost:3000')
   window.App = App
 
   App
