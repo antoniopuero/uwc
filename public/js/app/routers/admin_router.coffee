@@ -7,11 +7,15 @@ define ['cs!app/views/admin_layout', 'marionette'], (AdminLayout, Marionette) ->
     routes:
       '': 'index'
       'categories': 'categories'
-      'category/:id': 'category'
+      'categories/:id': 'category'
       'articles': 'articles'
+      'articles/:id': 'article'
 
     index: ->
       App.layout.showArticles()
+
+    article: (id) ->
+      App.layout.showArticle(id)
 
     articles: ->
       App.layout.showArticles()
