@@ -5,7 +5,7 @@ requirejs.config({
         jquery: 'components/jquery/jquery',
         validator: 'components/jquery.validation/jquery.validate',
         bootstrap: 'components/bootstrap.css/js/bootstrap',
-        inputmask: 'components/jquery.inputmask/js/jquery.inputmask',
+        isotope: 'components/isotope/jquery.isotope',
         underscore: "components/underscore/underscore",
         backbone: "components/backbone/backbone",
         marionette: "components/backbone.marionette/lib/backbone.marionette",
@@ -22,14 +22,14 @@ requirejs.config({
         adminLayout: 'app/views/admin_layout',
         userLayout: 'app/views/user_layout',
         navView: 'app/views/nav_view',
-        modalView: 'app/views/modal_view',
+        modalView: 'app/views/modal_view'
 	},
 	shim: {
         bootstrap: {
             deps: ['jquery']
         },
-        timepicker: {
-          deps: ["jquery"]
+        isotope: {
+            deps: ['jquery']
         },
         validator: {
           deps: ['jquery']
@@ -49,7 +49,7 @@ requirejs.config({
 	urlArgs: "bust=" + (new Date()).getTime()
 });
 
-requirejs(['cs!app/app'], function (App) {
+requirejs(['cs!app/app', 'isotope'], function (App) {
     return $(function(){
         App.start();
     });
