@@ -20,6 +20,8 @@ ArticleSchema = new Schema
 
     rating: Number
 
+    isPublished: Boolean
+
 
 
 module.exports = global.connections.common.model 'Article', ArticleSchema

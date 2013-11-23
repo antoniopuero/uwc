@@ -2,8 +2,11 @@ Article = require "#{global.path.root}/models/Article"
 
 class categoryService
 
-    findAll: (callback) ->
-        Article.find {}, callback
+    findAll: (categoryId, callback) ->
+        if categoryId?
+            Article.where('categoryId').equals(categoryId).exec callback
+        else
+            Article.find {}, callback
 
     findById: (id, callback) ->
         Article.findById id , callback
