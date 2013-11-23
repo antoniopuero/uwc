@@ -10,6 +10,8 @@ requirejs.config({
       backbone: "components/backbone/backbone",
       marionette: "components/backbone.marionette/lib/backbone.marionette",
       isotope: "components/isotope/jquery.isotope",
+      ckeditor: "components/ckeditor/ckeditor",
+      ckeditorAdapter: "components/ckeditor/adapters/jquery",
 
       // MODELS
       user: 'app/models/users',
@@ -39,8 +41,14 @@ requirejs.config({
         isotope: {
             deps: ['jquery']
         },
+        ckeditor: {
+            deps: ['jquery']
+        },
+        ckeditorAdapter: {
+            deps: ['ckeditor']
+        },
         validator: {
-          deps: ['jquery']
+            deps: ['jquery']
         },
         backbone: {
             deps: ["underscore", "jquery"],
@@ -57,7 +65,7 @@ requirejs.config({
 	urlArgs: "bust=" + (new Date()).getTime()
 });
 
-requirejs(['cs!app/app', 'isotope'], function (App) {
+requirejs(['cs!app/app'], function (App) {
     return $(function(){
         App.start();
     });

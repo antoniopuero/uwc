@@ -1,5 +1,7 @@
 define [
-  'marionette'
+  'marionette',
+  'isotope',
+  'ckeditorAdapter'
 ], (Marionette) ->
   class UserLayout extends Marionette.Layout
     template: '#user-template'
@@ -19,6 +21,12 @@ define [
           },
           sortBy: 'priority'
         }, () ->
-          console.log 'fsafads'
+          console.log 'it works'
+        $('.article .article-prologue').attr({
+          contenteditable: true,
+          spellcheck: false
+        }).ckeditor({
+          filebrowserImageUploadUrl: '/upload'
+        })
 
   UserLayout
