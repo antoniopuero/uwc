@@ -28,7 +28,9 @@ requirejs.config({
       userLayout: 'app/views/user_layout',
       navView: 'app/views/nav_view',
       adminArticlesView: 'app/views/admin_articles_view',
+      userArticlesView: 'app/views/user_articles_view',
       adminArticleView: 'app/views/admin_article_view',
+      userArticleView: 'app/views/user_article_view',
       adminCategoriesView: 'app/views/admin_categories_view',
       adminCategoryView: 'app/views/admin_category_view'
 	},
