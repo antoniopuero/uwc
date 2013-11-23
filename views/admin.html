@@ -89,6 +89,7 @@
 <script type="text/template" id="admin-category-template">
   <td><a href="#/category/<%= _id %>"><%= title %></a></td>
   <td><%= orderNumber %></td>
+  <td><i class="icon-trash delete"></i></td>
 </script>
 
 <script type="text/template" id="admin-articles-template">
@@ -114,7 +115,7 @@
     <thead>
     <tr>
       <th>Название</th>
-      <th>Сортировка</th>
+      <th>Категория</th>
       <th></th>
     </tr>
     </thead>
@@ -125,5 +126,6 @@
 <script type="text/template" id="admin-article-template">
   <td><%= title %></td>
   <td><%= categoryId %></td>
+  <td><i class="icon-trash delete"></i></td>
 </script>
 {% endblock %}

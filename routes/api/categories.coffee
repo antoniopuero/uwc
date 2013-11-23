@@ -17,8 +17,8 @@ module.exports = (app) ->
             if err then return next err
             res.json category
 
-    app.delete '/api/categories', (req, res, next) ->
-        categoryService.findById req.body.id, (err, category) ->
+    app.delete '/api/categories/?:id', (req, res, next) ->
+        categoryService.findById req.params.id, (err, category) ->
             if err then return next err
             category.remove (err, data) ->
                 if err then return next err

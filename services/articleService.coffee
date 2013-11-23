@@ -9,6 +9,7 @@ class categoryService
             Article.find {}, callback
 
     findById: (id, callback) ->
+        console.log arguments
         Article.findById id , callback
 
     findByCategoryId: (categoryId, callback) ->

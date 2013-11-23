@@ -3,8 +3,11 @@ define ['cs!userLayout', 'marionette'], (UserLayout, Marionette) ->
     routes:
       '': 'index'
 
+    initialize: ->
+      # App.layout = new UserLayout
+      # App.content.show App.layout
+
     index: ->
-      App.layout = new UserLayout
-      App.content.show App.layout
+      # App.layout.showArticles()
 
   UserRouter

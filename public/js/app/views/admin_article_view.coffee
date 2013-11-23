@@ -3,4 +3,10 @@ define ['marionette'], (Marionette) ->
     tagName: 'tr'
     template: '#admin-article-template'
 
+    events:
+      'click .delete': 'delete'
+
+    delete: ->
+      @model.destroy()
+
   AdminArticleView

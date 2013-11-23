@@ -7,6 +7,10 @@ define [
   class UserLayout extends Marionette.Layout
     template: '#user-template'
 
+    initialize: ->
+      # @articles = new Articles
+      # @categories = new Categories
+
     regions:
       modal: "#modal"
 
@@ -30,5 +34,10 @@ define [
         }).ckeditor({
           filebrowserImageUploadUrl: '/upload'
         })
+
+
+    showArticles: ->
+      @content.show new AdminArticlesView collection: @articles
+      @articles.fetch()
 
   UserLayout
