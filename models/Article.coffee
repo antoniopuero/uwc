@@ -8,6 +8,7 @@ ArticleSchema = new Schema
         required: true
     body:
         type: String
+        default: 'Body of your article'
 
     categoryId: ObjectId
 
@@ -20,7 +21,5 @@ ArticleSchema = new Schema
     rating: Number
 
     isPublished: Boolean
-
-
 
 module.exports = global.connections.common.model 'Article', ArticleSchema
