@@ -1,7 +1,8 @@
 define [
   'marionette',
   'isotope',
-  'ckeditorAdapter'
+  'ckeditorAdapter',
+  'imagesLoaded'
 ], (Marionette) ->
   class UserLayout extends Marionette.Layout
     template: '#user-template'
@@ -10,6 +11,9 @@ define [
       modal: "#modal"
 
     onShow: ->
+      $('#content').imagesLoaded (instance)->
+        console.log instance
+
       $('#content').isotope {
           itemSelector : '.article',
           layoutMode : 'fitRows',

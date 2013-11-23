@@ -10,6 +10,7 @@ requirejs.config({
       backbone: "components/backbone/backbone",
       marionette: "components/backbone.marionette/lib/backbone.marionette",
       isotope: "components/isotope/jquery.isotope",
+      imagesLoaded: "components/imagesloaded/imagesloaded",
       ckeditor: "components/ckeditor/ckeditor",
       ckeditorAdapter: "components/ckeditor/adapters/jquery",
 
@@ -39,6 +40,9 @@ requirejs.config({
             deps: ['jquery']
         },
         isotope: {
+            deps: ['jquery']
+        },
+        imagesLoaded: {
             deps: ['jquery']
         },
         ckeditor: {

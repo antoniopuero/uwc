@@ -14,16 +14,37 @@ label.error
     outline: 1px solid #BBB3B3
     box-shadow: 2px 2px 5px #999696
 
-.article-header
-    border-bottom: 1px solid #A1AFE4
-    border-left: 3px solid #30DD44
-    padding-left: 1%
+    .row-fluid
+        border-bottom: 1px solid #A1AFE4
 
-.article-header a
-    color: #416475
-    &:hover
-        color: #7082C2
-        text-decoration: none
+        &:last-child
+            border-bottom: none
+
+.article-image
+    width: 100%
+    min-heght: 50px;
+    max-height: 200px
+    text-align: center
+
+    img
+        position: relative
+        max-height: 100%
+        display: inline
+
+
+.article-header
+    padding-left: 1%
+    text-align: center
+
+    a
+        color: #416475
+        &:hover
+            color: #7082C2
+            text-decoration: none
 
 .article-prologue
     padding: 2%
+
+.article-author
+    text-align: center
+    color: #474747
