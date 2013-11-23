@@ -2,7 +2,7 @@
 
 {% block navbar %}
 <div class="navbar-inner">
-  <a class="brand" href="/#">TaxiNews</a>
+  <a class="brand" href="/#">SkyNews</a>
   <ul class="nav pull-right" id="auth">
     <!-- AUTH FORM -->
     {% if user %}
@@ -130,7 +130,16 @@
 </script>
 
 <script type="text/template" id="admin-article-edit-template">
-  <h2><div class="editable"><%= title %></div></h2>
-  <div class="editable"><%= body %></div>
+  <h2><div class="editable" data-name="title"><%= title %></div></h2>
+  <div class="editable" data-name="body"><%= body %></div>
+
+  <form>
+    <div class="control-group">
+      <div class="controls submit">
+        <input type="button" class="btn btn-success" value="Сохранить">
+        <input type="button" class="btn btn-danger" value="Отмена">
+      </div>
+    </div>
+  </form>
 </script>
 {% endblock %}

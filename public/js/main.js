@@ -1,5 +1,5 @@
 requirejs.config({
-  baseUrl: 'js/',
+  baseUrl: '/js/',
   paths: {
      // THIRD PART
       jquery: 'components/jquery/jquery',
@@ -33,6 +33,7 @@ requirejs.config({
       userArticlesView: 'app/views/user_articles_view',
       adminArticleView: 'app/views/admin_article_view',
       userArticleView: 'app/views/user_article_view',
+      userArticleFullView: 'app/views/user_article_full_view',
       adminCategoriesView: 'app/views/admin_categories_view',
       adminCategoryView: 'app/views/admin_category_view',
       adminArticleEditView: 'app/views/admin_article_edit_view'

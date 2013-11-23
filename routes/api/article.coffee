@@ -19,8 +19,8 @@ module.exports = (app) ->
             if err then return next err
             res.json article
 
-    app.put '/api/articles', (req, res, next) ->
-        articleService.update req.body.id, req.body, (err, article) ->
+    app.put '/api/articles/:id?', (req, res, next) ->
+        articleService.update req.params.id, req.body, (err, article) ->
             if err then return next err
             res.json article
 

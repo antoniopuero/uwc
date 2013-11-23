@@ -60,28 +60,29 @@
 
 <script type="text/template" id="user-article-template">
 
-    <div class="article span3" data-num="5450">
         <div class="article-image row-fluid">
             <img src="i/article.jpg">
         </div>
         <div class="article-header row-fluid">
-            <h4><a href="/article-route"><%= title %></a></h4>
+            <h4><a href="#/articles/<%= _id %>"><%= title %></a></h4>
         </div>
         <div class="row-fluid">
-          
+
             <div class="article-prologue container-fluid">
               <%= body %>
             </div>
 
         </div>
         <div class="article-author row-fluid">
-            Author Name
         </div>
-    </div>
+
 </script>
 
-<script type="text/template" id="user-article-full-template">
-  <div>imma user template</div>
+
+
+<script type="text/template" id="user-article-full-view">
+  <h1><%= title %></h1>
+  <div><%= body %></div>
 </script>
 
 {% endblock %}
