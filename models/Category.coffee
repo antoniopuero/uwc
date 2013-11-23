@@ -6,6 +6,8 @@ CategorySchema = new Schema
         type: String
         required: true
 
-    orderNumber: Number
+    orderNumber:
+        type: Number
+        default: 0
 
 module.exports = global.connections.common.model 'Category', CategorySchema

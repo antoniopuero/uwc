@@ -8,7 +8,6 @@ ArticleSchema = new Schema
         required: true
     body:
         type: String
-        required: true
 
     categoryId: ObjectId
 

@@ -19,6 +19,10 @@ define [
       @content.show new AdminArticlesView collection: @articles
       @articles.fetch()
 
+    showCategory: (id) ->
+      @content.show new AdminArticlesView collection: @articles, categoryId: id
+      @articles.fetch data: { categoryId: id }
+
     showCategories: ->
       @content.show new AdminCategoriesView collection: @categories
       @categories.fetch()
