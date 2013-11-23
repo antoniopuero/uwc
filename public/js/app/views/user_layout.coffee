@@ -9,4 +9,12 @@ define [
     regions:
       modal: "#modal"
 
+    onShow: ->
+      $('#container').isotope(
+        {
+          itemSelector : '.article',
+          layoutMode : 'fitRows'
+        }
+      )
+
   UserLayout
