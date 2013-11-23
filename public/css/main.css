@@ -5,7 +5,7 @@ label.error{color:#c7254e;background:#f9f2f4}
 .article .row-fluid{border-bottom:1px solid #d4d7e4;}
 .article .row-fluid:last-child{border-bottom:none}
 .article-image{width:100%;height:150px;text-align:center;}
-.article-image img{position:relative;height:100%;display:inline}
+.article-image img{position:relative;height:100% !important;display:inline}
 .article-header{padding-left:1%;text-align:center;}
 .article-header a{color:#416475;}
 .article-header a:hover{color:#7082c2;text-decoration:none}

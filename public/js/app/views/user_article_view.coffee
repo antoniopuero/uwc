@@ -12,4 +12,18 @@ define ['marionette'], (Marionette) ->
         else
           data
 
+      rep: (data) ->
+        data.replace(/\<img[^\>]*\>/, "")
+
+      getImg: (data) ->
+        console.log  data.match(/\<img[^\>]*\>/)[0]
+
+        img = data.match(/\<img[^\>]*\>/)
+
+
+        if img?
+            return img[0]
+        else
+            ''
+
   UserArticleView

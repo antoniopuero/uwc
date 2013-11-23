@@ -61,6 +61,7 @@
 <script type="text/template" id="user-article-template">
 
         <div class="article-image row-fluid">
+          <%= getImg(body) %>
         </div>
         <div class="article-header row-fluid">
             <h4><a href="#/articles/<%= _id %>"><%= title %></a></h4>
@@ -68,7 +69,7 @@
         <div class="row-fluid">
 
             <div class="article-prologue container-fluid">
-              <%= cut(body) %>
+              <%= rep(body) %>
             </div>
 
         </div>
