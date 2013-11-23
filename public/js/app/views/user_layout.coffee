@@ -10,11 +10,15 @@ define [
       modal: "#modal"
 
     onShow: ->
-      $('#container').isotope(
-        {
+      $('#content').isotope {
           itemSelector : '.article',
-          layoutMode : 'fitRows'
-        }
-      )
+          layoutMode : 'fitRows',
+          getSortData : {
+            priority: ( $elem ) ->
+              parseInt( $elem.data('num'), 10)
+          },
+          sortBy: 'priority'
+        }, () ->
+          console.log 'fsafads'
 
   UserLayout
