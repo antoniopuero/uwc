@@ -10,4 +10,5 @@ define ['cs!userLayout', 'marionette'], (UserLayout, Marionette) ->
     index: ->
       App.layout.showArticles()
 
+
   UserRouter

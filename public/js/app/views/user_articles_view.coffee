@@ -11,8 +11,8 @@ define [
     initialize: (options) ->
 
     onCompositeCollectionRendered: ->
-      console.log @el
-        @$('#content').isotope {
+      setTimeout ->
+        $('#content').isotope({
           itemSelector : '.article',
           layoutMode : 'fitRows',
           getSortData : {
@@ -20,6 +20,7 @@ define [
               parseInt( $elem.data('num'), 10)
           },
           sortBy: 'priority'
-        }
+        })
+      , 1000
 
   UserArticlesView
