@@ -120,20 +120,20 @@ app.use (req, res, next)->
 
 initRoutes "#{global.path.root}/routes"
 
-# app.use (err, req, res, next) ->
-#   if req.xhr
-#     res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
-#   else
-#     if err instanceof NotFound
-#       res.status(404)
-#       res.render 'errors/404.html'
-#     else if err instanceof Unauthorized or err instanceof Forbidden
-#       res.status(403)
-#       res.render 'errors/403.html'
-#     else
-#       console.log(err.stack || err)
-#       res.status(500)
-#       res.render 'errors/500.html'
+app.use (err, req, res, next) ->
+  if req.xhr
+    res.apiResponse(null, err.code || 500, err.toString() || "Unexpected error")
+  else
+    if err instanceof NotFound
+      res.status(404)
+      res.render 'errors/404.html'
+    else if err instanceof Unauthorized or err instanceof Forbidden
+      res.status(403)
+      res.render 'errors/403.html'
+    else
+      console.log(err.stack || err)
+      res.status(500)
+      res.render 'errors/500.html'
 
 app.get '*', (req, res, next) ->
   next new app.Errors.NotFound

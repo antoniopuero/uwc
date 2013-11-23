@@ -2,7 +2,7 @@ articleService = require "#{global.path.root}/services/articleService"
 
 module.exports = (app) ->
 
-    app.get '/api/articles/?:id', (req, res, next) ->
+    app.get '/api/articles/:id?', (req, res, next) ->
         categoryId = req.query.categoryId
 
         if req.params.id?
@@ -24,7 +24,7 @@ module.exports = (app) ->
             if err then return next err
             res.json article
 
-    app.delete '/api/articles/?:id', (req, res, next) ->
+    app.delete '/api/articles/:id?', (req, res, next) ->
         articleService.findById req.params.id, (err, article) ->
             if err then return next err
             article.remove (err, data) ->
