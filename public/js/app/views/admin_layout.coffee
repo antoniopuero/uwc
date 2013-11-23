@@ -18,9 +18,8 @@ define [
       @categories = new Categories
 
     showArticle: (id) ->
-      model = new Article
+      model = new Article(_id: id)
       @articles.add model
-      model.id = id
       model.fetch success: =>
         @content.show new AdminArticleEditView model: model
 
