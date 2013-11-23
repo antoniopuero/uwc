@@ -6,6 +6,9 @@
   <ul class="nav pull-right" id="auth">
     <!-- AUTH FORM -->
     {% if user %}
+    <li>
+      <a href="/admin">Админ</a>
+    </li>
 
     <li>
       <a href="/#">{{ user.username }}</a>
