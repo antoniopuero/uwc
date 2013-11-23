@@ -20,7 +20,7 @@ module.exports = (app) ->
             res.json article
 
     app.delete '/api/articles/?:id', (req, res, next) ->
-        articleService.findById req.body.id, (err, article) ->
+        articleService.findById req.params.id, (err, article) ->
             if err then return next err
             article.remove (err, data) ->
                 if err then return next err

@@ -5,8 +5,8 @@ define [
     template: '#user-template'
 
     initialize: ->
-      @articles = new Articles
-      @categories = new Categories
+      # @articles = new Articles
+      # @categories = new Categories
 
     regions:
       modal: "#modal"

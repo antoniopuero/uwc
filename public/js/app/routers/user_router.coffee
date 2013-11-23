@@ -4,10 +4,10 @@ define ['cs!userLayout', 'marionette'], (UserLayout, Marionette) ->
       '': 'index'
 
     initialize: ->
-      App.layout = new UserLayout
-      App.content.show App.layout
+      # App.layout = new UserLayout
+      # App.content.show App.layout
 
     index: ->
-      App.layout.showArticles()
+      # App.layout.showArticles()
 
   UserRouter
